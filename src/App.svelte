@@ -12,10 +12,19 @@
         description: "点击div有惊喜哦",
       },
       isFinish: () => {
-        if (document.querySelector("#isDiv")) {
-          return true;
-        }
-        return false;
+        return true;
+      },
+    },
+    {
+      element: () => document.querySelector("#isDiv"),
+      trigger: "click",
+      speech: "很好,您点击了这个按钮!",
+      popover: {
+        title: "请点击这里可以改变颜色",
+        description: "点击这里可以改变颜色",
+      },
+      isFinish: () => {
+        return true;
       },
     },
   ];
@@ -30,7 +39,8 @@
     <button
       id="addDiv"
       on:click={handleClickDiv}
-      class="w-100px bg-hex-0170fe h-40px text-hex-fff m-20px">新增DIV</button
+      class="w-100px bg-hex-0170fe h-40px text-hex-fff m-0px absolute left-200px"
+      >新增DIV</button
     >
     {#if showDiv}
       <div

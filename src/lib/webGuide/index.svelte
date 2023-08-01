@@ -2,14 +2,15 @@
   import { onMount } from "svelte";
   import type { Options } from "./types";
   import { getEle, setStyle } from "./utils";
+  import Tip from "./Tip.svelte";
   export let options: Options[];
 
-  const step = 0; // 当前步骤
-  const optItem = options[step];
+  let step = 0; // 当前步骤
+  $: optItem = options[step];
+  let ele: HTMLElement;
 
   const start = async () => {
-    let ele = await getEle(optItem.element); // 当前操作的Dom对象
-
+    ele = await getEle(optItem.element); // 当前操作的Dom对象
     // 给 ele 设置样式
     setStyle(ele, {
       position: "fixed",
@@ -17,10 +18,21 @@
       boxShadow: `rgba(33, 33, 33, 0.8) 0px 0px 1px 2px, rgba(33, 33, 33, 0.5) 0px 0px 0px 5000px`,
     } as CSSStyleDeclaration);
 
-    ele.addEventListener(optItem.trigger, () => {
+    ele.addEventListener(optItem.trigger, async () => {
       // 判断用户有没有点击
+      step++;
 
-      console.log("click");
+      ele = await getEle(options[step].element); // 当前操作的Dom对象
+
+      const { width } = ele.getBoundingClientRect();
+
+      // 给 ele 设置样式
+      setStyle(ele, {
+        position: "absolute",
+        zIndex: "9999998",
+        width: width + "px",
+        boxShadow: `rgba(33, 33, 33, 0.8) 0px 0px 1px 2px, rgba(33, 33, 33, 0.5) 0px 0px 0px 5000px`,
+      } as CSSStyleDeclaration);
     });
   };
   onMount(start);
@@ -28,6 +40,7 @@
 
 <div style="">
   <div class="web-guide__overlay"></div>
+  <Tip {optItem}></Tip>
 </div>
 
 <style>

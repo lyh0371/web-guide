@@ -28,3 +28,20 @@ export const setStyle = (ele: HTMLElement, style: CSSStyleDeclaration) => {
     ele.style[key] = style[key];
   }
 };
+
+// 获取元素距离屏幕的位置
+export const getDomDiection = (myDiv: HTMLElement) => {
+  const rect = myDiv.getBoundingClientRect();
+  const topDistance = rect.top;
+  const bottomDistance = window.innerHeight - rect.bottom;
+  const leftDistance = rect.left;
+  const rightDistance = window.innerWidth - rect.right;
+  return {
+    top: topDistance,
+    bottom: bottomDistance,
+    left: leftDistance,
+    right: rightDistance,
+    width: rect.width,
+    height: rect.height,
+  };
+};
