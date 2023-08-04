@@ -16,7 +16,7 @@
       },
     },
     {
-      element: () => document.querySelector("#isDiv"),
+      element: () => document.querySelector("#idDivBtn"),
       trigger: "click",
       speech: "很好,您点击了这个按钮!",
       popover: {
@@ -31,6 +31,11 @@
   let showDiv = false;
   const handleClickDiv = () => {
     showDiv = true;
+  };
+
+  const divBtnClick = () => {
+    const div = document.querySelector("#isDiv") as HTMLElement;
+    div.style.backgroundColor = "red";
   };
 </script>
 
@@ -47,7 +52,10 @@
         id="isDiv"
         class="h-200px bg-hex-287 flex justify-center items-center text-hex-fff"
       >
-        <button class=" bg-hex-0170fe h-40px text-hex-fff m-20px px-10px"
+        <button
+          id="idDivBtn"
+          on:click={divBtnClick}
+          class=" bg-hex-0170fe h-40px text-hex-fff m-20px px-10px"
           >给DIV添加点颜色瞧瞧</button
         >
       </div>

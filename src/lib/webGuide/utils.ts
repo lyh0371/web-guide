@@ -45,3 +45,17 @@ export const getDomDiection = (myDiv: HTMLElement) => {
     height: rect.height,
   };
 };
+
+// 获取元素原来的样式
+
+export const getStyles = (ele: HTMLElement) => {
+  const position = ele.style.position;
+  const zIndex = ele.style.zIndex;
+  const boxShadow = ele.style.boxShadow;
+
+  return {
+    position,
+    zIndex,
+    boxShadow,
+  } as CSSStyleDeclaration;
+};
