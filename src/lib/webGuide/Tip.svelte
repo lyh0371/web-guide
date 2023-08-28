@@ -1,17 +1,19 @@
 <script lang="ts">
   import { afterUpdate, onMount } from "svelte";
-  import type { Options } from "./types";
+  import type { StepArr } from "./types";
   import { getDomDiection, getEle, setStyle } from "./utils";
+  import { defaultDelayed } from "../const";
 
+  let showContent = false;
   const top: string = "";
   const left: string = "";
-  export let optItem: Options;
+  export let optItem: StepArr;
 
   const piglogo =
     "//oss-my-official-website.oss-cn-beijing.aliyuncs.com/upload/20230731/dbf62e6a5acf5e7da04b444bb04727d0.png";
 
   // 设置位置
-  const setTipPosition = async (optItem: Options) => {
+  const setTipPosition = async (optItem: StepArr) => {
     const tagetDom = await getEle(optItem.element);
 
     const tipDom = document.querySelector(".web-guide__tip") as HTMLElement;
@@ -58,33 +60,32 @@
       [yData.dir]: yData.value + "px",
     } as CSSStyleDeclaration);
   };
-
+  setTipPosition(optItem);
   $: {
+    showContent = false;
     setTimeout(() => {
       setTipPosition(optItem);
-    }, 100);
+      showContent = true;
+    }, optItem.delayed ?? defaultDelayed);
   }
-
-  // onMount(() => {
-  //   setTipPosition();
-  // });
 </script>
 
-<div class="web-guide__tip">
-  <div class="tip__wapper flex items-center">
-    <img src={piglogo} class="w-80px" alt="" />
-    <div class="pl-10px">
-      <h2 class="font-700 text-18px">{optItem.popover.title}</h2>
-      <p
-        class="text-14px mt-8px tracking-2px leading-18px text-hex-666 max-h-200px overflow-y-auto"
-      >
-        {optItem.popover.description}
-      </p>
+{#if showContent}
+  <div class="web-guide__tip" id="guide__tip">
+    <div class="tip__wapper flex items-center">
+      <img src={piglogo} class="w-80px" alt="" />
+      <div class="pl-10px">
+        <h2 class="font-700 text-18px">{optItem.popover.title}</h2>
+        <p
+          class="text-14px mt-8px tracking-2px leading-18px text-hex-666 max-h-200px overflow-y-auto"
+        >
+          {optItem.popover.description}
+        </p>
+      </div>
     </div>
+    <div class="introjs-arrow"></div>
   </div>
-
-  <div class="introjs-arrow"></div>
-</div>
+{/if}
 
 <style lang="scss">
   .web-guide__tip {

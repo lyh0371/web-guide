@@ -1,33 +1,30 @@
 <script lang="ts">
   import WebGuide from "./lib/webGuide/index.svelte";
-  import type { Options } from "./lib/webGuide/types";
+  import type { Settings, StepArr } from "./lib/webGuide/types";
 
-  const options: Options[] = [
-    {
-      element: () => document.querySelector("#addDiv"),
-      trigger: "click",
-      speech: "很好,您点击了这个按钮!",
-      popover: {
-        title: "请点击div",
-        description: "点击div有惊喜哦",
+  const settings: Settings = {
+    stepArr: [
+      {
+        element: () => document.querySelector("#addDiv"),
+        trigger: "click",
+        speech: "很好,您点击了这个按钮!",
+        popover: {
+          title: "请点击div",
+          description: "点击div有惊喜哦",
+        },
       },
-      isFinish: () => {
-        return true;
+      {
+        element: () => document.querySelector("#idDivBtn"),
+        trigger: "click",
+        speech: "很好,您点击了这个按钮!",
+        popover: {
+          title: "请点击这里可以改变颜色",
+          description: "点击这里可以改变颜色",
+        },
       },
-    },
-    {
-      element: () => document.querySelector("#idDivBtn"),
-      trigger: "click",
-      speech: "很好,您点击了这个按钮!",
-      popover: {
-        title: "请点击这里可以改变颜色",
-        description: "点击这里可以改变颜色",
-      },
-      isFinish: () => {
-        return true;
-      },
-    },
-  ];
+    ],
+  };
+
   let showDiv = false;
   const handleClickDiv = () => {
     showDiv = true;
@@ -61,7 +58,7 @@
       </div>
     {/if}
   </div>
-  <WebGuide {options} />
+  <WebGuide {settings} />
 </div>
 
 <style>

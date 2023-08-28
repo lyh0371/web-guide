@@ -1,26 +1,24 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import type { Options } from "./types";
+  import type { Settings } from "./types";
   import { getEle, getStyles, setStyle } from "./utils";
   import Tip from "./Tip.svelte";
-  export let options: Options[];
+  import { defaultDelayed } from "../const";
+  export let settings: Settings;
+
+  const stepArr = settings.stepArr;
   let finish = false; // 是否结束
 
   let step = 0; // 当前步骤
-  $: optItem = options[step];
+  $: optItem = stepArr[step];
   let ele: HTMLElement;
   let oldStyles = {} as CSSStyleDeclaration;
 
   const start = async () => {
     ele = await getEle(optItem.element); // 当前操作的Dom对象
-
     const { width } = ele.getBoundingClientRect();
     // 给 ele 设置样式
-
     oldStyles = getStyles(ele);
-
-    console.log("oldStyles", oldStyles);
-
     setStyle(ele, {
       position: "fixed",
       zIndex: "9999998",
@@ -31,19 +29,15 @@
     ele.addEventListener(optItem.trigger, async () => {
       // 把样式重置回来
       setStyle(ele, oldStyles);
-
       ele.removeEventListener(optItem.trigger, () => {});
       step = step + 1;
-
-      console.log(step, options.length);
-
-      if (step >= options.length) {
+      if (step >= stepArr.length) {
         isFinish();
         return false;
       }
       setTimeout(() => {
         start();
-      }, 10);
+      }, optItem.delayed ?? defaultDelayed);
     });
   };
 
