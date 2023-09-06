@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./dist/index.css" />
+  </head>
+  <body>
+    <div id="content"></div>
+    <div id="div">我是按钮</div>
+    <script type="module">
+      import webGuide from "./dist/index.es.js";
+
+      console.log(webGuide);
+      const guide = new webGuide({
+        target: document.querySelector("#content"),
+        props: {
+          settings: {
+            immediate: true,
+            stepArr: [
+              {
+                element: () => document.querySelector("#div"),
+                trigger: "click",
+                speech: "很好,您点击了这个按钮!",
+                popover: {
+                  title: "请点击div",
+                  description: "点击div有惊喜哦",
+                },
+              },
+            ],
+          },
+        },
+
+        next() {
+          console.log("next");
+        },
+      });
+
+      console.log(guide);
+      // console.log(guide.next());
+    </script>
+  </body>
+</html>

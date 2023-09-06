@@ -11,9 +11,7 @@
 
   let playGuide = settings.immediate; // 是否执行
   let step = 0; // 当前步骤
-  let ele: HTMLElement;
   let oldStyles = {} as CSSStyleDeclaration;
-
   async function getTargetEle() {
     let optItem = stepArr[step];
     return await getEle(optItem.element); // 当前操作的Dom对象
@@ -47,7 +45,6 @@
   };
 
   const isFinish = async () => {
-    console.log("结束");
     finish = true;
     const ele = await getTargetEle();
     setStyle(ele, oldStyles);
@@ -66,7 +63,7 @@
 
 <div style="">
   {#if !finish && playGuide}
-    <div class="web-guide__overlay"></div>
+    <div class="web-guide__overlay">111</div>
     <Tip optItem={stepArr[step]} on:guideFinish={isFinish}></Tip>
   {/if}
 </div>
@@ -77,7 +74,7 @@
     position: fixed;
     cursor: pointer;
     box-sizing: content-box;
-    z-index: 999999;
+    z-index: 999990;
     opacity: 0;
     transition: all 0.3s ease-out;
   }

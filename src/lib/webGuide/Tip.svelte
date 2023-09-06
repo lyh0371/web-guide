@@ -102,7 +102,7 @@
     padding: 20px;
     padding-bottom: 10px;
     background-color: #fff;
-    z-index: 9999998;
+    z-index: 9999999;
     border-radius: 10px;
     max-width: 340px;
     max-height: 200px;
