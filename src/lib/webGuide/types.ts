@@ -12,5 +12,5 @@ export interface StepArr {
 
 export interface Settings {
   stepArr: StepArr[];
-  immed?: boolean;
+  immediate?: boolean; // 是否立即执行
 }

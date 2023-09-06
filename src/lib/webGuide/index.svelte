@@ -9,6 +9,7 @@
   const stepArr = settings.stepArr;
   let finish = false; // 是否结束
 
+  let playGuide = settings.immediate; // 是否执行
   let step = 0; // 当前步骤
   $: optItem = stepArr[step];
   let ele: HTMLElement;
@@ -45,11 +46,18 @@
     console.log("结束");
     finish = true;
   };
-  onMount(start);
+  // 是否立即执行
+  if (playGuide) {
+    onMount(start);
+  }
+
+  export function next(index: number) {
+    console.log("index===", index);
+  }
 </script>
 
 <div style="">
-  {#if !finish}
+  {#if !finish && playGuide}
     <div class="web-guide__overlay"></div>
     <Tip {optItem}></Tip>
   {/if}

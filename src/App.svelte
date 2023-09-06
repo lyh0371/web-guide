@@ -1,8 +1,10 @@
 <script lang="ts">
   import WebGuide from "./lib/webGuide/index.svelte";
-  import type { Settings, StepArr } from "./lib/webGuide/types";
+  import type { Settings } from "./lib/webGuide/types";
+  let child;
 
   const settings: Settings = {
+    immediate: false,
     stepArr: [
       {
         element: () => document.querySelector("#addDiv"),
@@ -28,6 +30,9 @@
   let showDiv = false;
   const handleClickDiv = () => {
     showDiv = true;
+  };
+  const textHandle = () => {
+    child.next(1);
   };
 
   const divBtnClick = () => {
@@ -58,7 +63,9 @@
       </div>
     {/if}
   </div>
-  <WebGuide {settings} />
+  <WebGuide {settings} bind:this={child} />
+
+  <button on:click={textHandle}>测试分步控制</button>
 </div>
 
 <style>

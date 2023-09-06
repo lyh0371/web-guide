@@ -1,9 +1,7 @@
 <script lang="ts">
-  import { afterUpdate, onMount } from "svelte";
   import type { StepArr } from "./types";
   import { getDomDiection, getEle, setStyle } from "./utils";
   import { defaultDelayed } from "../const";
-
   let showContent = false;
   const top: string = "";
   const left: string = "";

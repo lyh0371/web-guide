@@ -23,6 +23,10 @@
 ];
 ```
 
+## 手动触发逻辑
+
+插件对外暴露一个函数 `next` 可以传参数，如果传参数就自动跳转到哪一个步走
+
 ## 如何让 vscode 格式化 .svelte 文件
 
 prettier-plugin-svelte
