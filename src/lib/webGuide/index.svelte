@@ -14,9 +14,13 @@
   let ele: HTMLElement;
   let oldStyles = {} as CSSStyleDeclaration;
 
+  async function getTargetEle() {
+    let optItem = stepArr[step];
+    return await getEle(optItem.element); // 当前操作的Dom对象
+  }
   const start = async () => {
     let optItem = stepArr[step];
-    ele = await getEle(optItem.element); // 当前操作的Dom对象
+    const ele = await getTargetEle();
     const { width } = ele.getBoundingClientRect();
     // 给 ele 设置样式
     oldStyles = getStyles(ele);
@@ -42,9 +46,11 @@
     });
   };
 
-  const isFinish = () => {
+  const isFinish = async () => {
     console.log("结束");
     finish = true;
+    const ele = await getTargetEle();
+    setStyle(ele, oldStyles);
   };
   // 是否立即执行
   if (playGuide) {
