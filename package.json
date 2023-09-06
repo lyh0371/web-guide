@@ -3,6 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "description": "与框架无关的前端动态新手引导组件",
+  "author": "刘小灰<https://github.com/lyh0371/sp-ui>",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
