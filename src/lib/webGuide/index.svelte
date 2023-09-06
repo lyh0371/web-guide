@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import type { Settings } from "./types";
+  import type { Next, Settings } from "./types";
   import { getEle, getStyles, setStyle } from "./utils";
   import Tip from "./Tip.svelte";
   import { defaultDelayed } from "../const";
@@ -11,11 +11,11 @@
 
   let playGuide = settings.immediate; // 是否执行
   let step = 0; // 当前步骤
-  $: optItem = stepArr[step];
   let ele: HTMLElement;
   let oldStyles = {} as CSSStyleDeclaration;
 
   const start = async () => {
+    let optItem = stepArr[step];
     ele = await getEle(optItem.element); // 当前操作的Dom对象
     const { width } = ele.getBoundingClientRect();
     // 给 ele 设置样式
@@ -50,16 +50,18 @@
   if (playGuide) {
     onMount(start);
   }
-
-  export function next(index: number) {
-    console.log("index===", index);
+  // 分步函数
+  export function next({ step: index }: Next) {
+    playGuide = true;
+    step = step;
+    start();
   }
 </script>
 
 <div style="">
   {#if !finish && playGuide}
     <div class="web-guide__overlay"></div>
-    <Tip {optItem}></Tip>
+    <Tip optItem={stepArr[step]} on:guideFinish={isFinish}></Tip>
   {/if}
 </div>
 

@@ -1,7 +1,9 @@
 <script lang="ts">
+  import { createEventDispatcher } from "svelte";
   import type { StepArr } from "./types";
   import { getDomDiection, getEle, setStyle } from "./utils";
   import { defaultDelayed } from "../const";
+  const dispatch = createEventDispatcher();
   let showContent = false;
   const top: string = "";
   const left: string = "";
@@ -66,6 +68,10 @@
       showContent = true;
     }, optItem.delayed ?? defaultDelayed);
   }
+
+  const endHandle = () => {
+    dispatch("guideFinish");
+  };
 </script>
 
 {#if showContent}
@@ -81,6 +87,11 @@
         </p>
       </div>
     </div>
+    <div class="flex justify-end">
+      <button on:click={endHandle} class="text-12px text-hex-888 cursor-pointer"
+        >结束引导</button
+      >
+    </div>
     <div class="introjs-arrow"></div>
   </div>
 {/if}
@@ -89,6 +100,7 @@
   .web-guide__tip {
     position: absolute;
     padding: 20px;
+    padding-bottom: 10px;
     background-color: #fff;
     z-index: 9999998;
     border-radius: 10px;

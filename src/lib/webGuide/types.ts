@@ -14,3 +14,7 @@ export interface Settings {
   stepArr: StepArr[];
   immediate?: boolean; // 是否立即执行
 }
+
+export interface Next {
+  step: number;
+}

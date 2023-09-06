@@ -59,3 +59,13 @@ export const getStyles = (ele: HTMLElement) => {
     boxShadow,
   } as CSSStyleDeclaration;
 };
+
+// 给元素添加类名
+export const addClassName = (ele: HTMLElement, name: string) => {
+  ele.classList.add(name);
+};
+
+// 移除元素类名
+export const removeClassName = (ele: HTMLElement, name: string) => {
+  ele.classList.remove(name);
+};

@@ -32,7 +32,7 @@
     showDiv = true;
   };
   const textHandle = () => {
-    child.next(1);
+    child.next(0);
   };
 
   const divBtnClick = () => {
