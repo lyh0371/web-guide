@@ -10,6 +10,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "dev:docs": "vitepress dev docs",
+    "build:docs": "vitepress build",
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "devDependencies": {
@@ -26,5 +28,8 @@
     "vite": "^4.4.5",
     "vite-plugin-windicss": "^1.9.0",
     "windicss": "^3.5.6"
+  },
+  "dependencies": {
+    "vitepress": "^1.0.0-rc.14"
   }
 }
