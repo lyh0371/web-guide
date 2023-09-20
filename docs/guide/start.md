@@ -13,9 +13,11 @@ returnToTop: false
 
 社区有很多关于新手引导的组件，比如优秀的 [driver.js](https://github.com/kamranahmedse/driver.js)、[shepherd](https://github.com/shipshapecode/shepherd)、[introjs](https://introjs.com/) ...
 
-但这些组件主要解决的还是`静态页面`的引导，试用与需要引导的功能都在静态页面上呈现出来的场景。
+但这些组件主要解决的还是`静态页面`的引导，适用于需要引导的功能都在静态页面上呈现出来的场景。
 
-而 `web-guide` 主要解决的是`动态页面`的引导，即需要引导的组件可以动态的按照先后顺序出现的场景。
+而 `web-guide` 主要解决的是`动态页面`的引导，即需要引导的内容可以动态的按照先后顺序出现的场景。
+
+[查看案例](/example/)
 
 ## 如何使用
 

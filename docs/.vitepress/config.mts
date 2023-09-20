@@ -24,12 +24,15 @@ export default defineConfig({
     },
     nav: [
       { text: "指南", link: "/guide/start" },
-      { text: "案例", link: "/example/index" },
+      { text: "案例", link: "/example/demo1" },
     ],
     sidebar: [
       {
         text: "指南",
-        items: [{ text: "", link: "" }],
+        items: [
+          { text: "自动开启", link: "/example/demo1" },
+          { text: "手动开启", link: "/example/demo2" },
+        ],
       },
     ],
   },

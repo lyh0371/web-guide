@@ -13,7 +13,7 @@ hero:
       link: /guide/start
     - theme: alt
       text: 案例
-      link: /example/index
+      link: /example/demo1
   image:
     src: /logo.png
     alt: webGuide
