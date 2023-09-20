@@ -5,27 +5,108 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="./dist/index.css" />
+
+    <style>
+      .wapper {
+        padding: 100px;
+      }
+      #addRole {
+        background: #3e63dd;
+        color: #fff;
+        padding: 5px 15px;
+        border-radius: 30px;
+        font-size: 14px;
+      }
+      #content {
+        display: none;
+        width: 100%;
+        height: 200px;
+        background-color: #3e63dd;
+        border-radius: 5px;
+        margin-top: 10px;
+        padding: 20px;
+      }
+      #content .header {
+        text-align: right;
+      }
+      .btn {
+        background: #fff;
+        color: #3e63dd;
+        padding: 5px 15px;
+        border-radius: 30px;
+        font-size: 14px;
+      }
+
+      #input {
+        text-align: center;
+        color: #fff;
+        font-size: 18px;
+        display: none;
+      }
+      #input input {
+        padding: 5px;
+      }
+    </style>
   </head>
   <body>
-    <div id="content"></div>
-    <div id="div">我是按钮</div>
+    <div class="wapper" id="app">
+      <button id="addRole">创建一个div</button>
+      <div id="content">
+        <div class="header">
+          <button id="addInput" class="btn">新增</button>
+        </div>
+        <div id="input">
+          <div>
+            <span>姓名：</span>
+            <input type="text" placeholder="请输入您的姓名" />
+          </div>
+          <button class="btn" style="margin-top: 20px">提交</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.querySelector("#addRole").addEventListener("click", () => {
+        document.querySelector("#content").style.display = "block";
+      });
+      document.querySelector("#addInput").addEventListener("click", () => {
+        document.querySelector("#input").style.display = "block";
+      });
+    </script>
+
     <script type="module">
       import webGuide from "./dist/index.es.js";
-
-      console.log(webGuide);
       const guide = new webGuide({
-        target: document.querySelector("#content"),
+        target: document.querySelector("#app"),
         props: {
           settings: {
             immediate: true,
             stepArr: [
               {
-                element: () => document.querySelector("#div"),
+                element: () => document.querySelector("#addRole"),
                 trigger: "click",
                 speech: "很好,您点击了这个按钮!",
                 popover: {
-                  title: "请点击div",
-                  description: "点击div有惊喜哦",
+                  title: "点击这里",
+                  description: "点击这里可创建一个全新的div哦",
+                },
+              },
+              {
+                element: () => document.querySelector("#addInput"),
+                trigger: "click",
+                speech: "很好,您点击了这个按钮!",
+                popover: {
+                  title: "点击这里",
+                  description: "点击这里可创建一个Input框哦！",
+                },
+              },
+              {
+                element: () => document.querySelector("#input"),
+                trigger: "click",
+                speech: "很好,您点击了这个按钮!",
+                popover: {
+                  title: "输入姓名",
+                  description: "请输入姓名，以便系统可以找到您！",
                 },
               },
             ],

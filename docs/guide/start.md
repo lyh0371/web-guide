@@ -17,7 +17,7 @@ returnToTop: false
 
 而 `web-guide` 主要解决的是`动态页面`的引导，即需要引导的内容可以动态的按照先后顺序出现的场景。
 
-[查看案例](/example/)
+[查看案例](/example/demo1)
 
 ## 如何使用
 
