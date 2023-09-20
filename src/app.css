@@ -1,0 +1,15 @@
+#web-guide__tooltip[data-popper-placement^="top"] > #arrow {
+  bottom: -4px;
+}
+
+#web-guide__tooltip[data-popper-placement^="bottom"] > #arrow {
+  top: -4px;
+}
+
+#web-guide__tooltip[data-popper-placement^="left"] > #arrow {
+  right: -4px;
+}
+
+#web-guide__tooltip[data-popper-placement^="right"] > #arrow {
+  left: -4px;
+}

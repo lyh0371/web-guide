@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "description": "与框架无关的前端动态新手引导组件",
-  "author": "刘小灰<https://github.com/lyh0371/sp-ui>",
+  "author": "刘小灰<https://github.com/lyh0371/web-guide>",
   "license": "MIT",
   "scripts": {
     "dev": "vite",
@@ -30,6 +30,7 @@
     "windicss": "^3.5.6"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.8",
     "vitepress": "^1.0.0-rc.14"
   }
 }

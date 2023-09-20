@@ -23,7 +23,7 @@
     // 给 ele 设置样式
     oldStyles = getStyles(ele);
     setStyle(ele, {
-      position: "fixed",
+      position: "relative",
       zIndex: "9999998",
       width: width + "px",
       boxShadow: `rgba(33, 33, 33, 0.8) 0px 0px 1px 2px, rgba(33, 33, 33, 0.5) 0px 0px 0px 5000px`,

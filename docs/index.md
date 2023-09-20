@@ -3,8 +3,8 @@
 layout: home
 
 hero:
-  name: 'web-guide'
-  text: '与框架无关的前端新手引导组件'
+  name: "web-guide"
+  text: "与框架无关的前端新手引导组件"
   tagline: 简单，强大，快速。支持动态引导。
 
   actions:
@@ -13,7 +13,7 @@ hero:
       link: /guide/start
     - theme: alt
       text: 案例
-      link: /api-examples
+      link: /example/index
   image:
     src: /logo.png
     alt: webGuide

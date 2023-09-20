@@ -1,18 +1,19 @@
 <script lang="ts">
   import WebGuide from "./lib/webGuide/index.svelte";
   import type { Settings } from "./lib/webGuide/types";
+  let inx = 0;
   let child;
-
   const settings: Settings = {
-    immediate: false,
+    immediate: true,
     stepArr: [
       {
         element: () => document.querySelector("#addDiv"),
         trigger: "click",
         speech: "很好,您点击了这个按钮!",
         popover: {
-          title: "请点击div",
-          description: "点击div有惊喜哦",
+          title: "请点击div请点击div",
+          description:
+            "点击div有惊喜哦点击div有惊喜哦点击div有惊喜哦点击div有点击div有惊喜哦点击div有惊喜哦点击div有惊喜哦点击div有点击div有惊喜哦点击div有惊喜哦点击div有惊喜哦点击div有",
         },
       },
       {
@@ -42,11 +43,12 @@
 </script>
 
 <div>
+  <div style="height: 400px;"></div>
   <div>
     <button
       id="addDiv"
       on:click={handleClickDiv}
-      class="w-100px bg-hex-0170fe h-40px text-hex-fff m-0px absolute left-200px"
+      class="w-100px bg-hex-0170fe h-40px text-hex-fff m-0px absolute top-200px left-200px"
       >新增DIV</button
     >
     {#if showDiv}
@@ -67,12 +69,3 @@
 
   <button on:click={textHandle}>测试分步控制</button>
 </div>
-
-<style>
-  /* #addDiv{
-  box-shadow: rgba(33, 33, 33, 0.8) 0px 0px 1px 2px, rgba(33, 33, 33, 0.5) 0px 0px 0px 5000px;
-    opacity: 1;
-    position: relative;
-    z-index: 9999998;
-} */
-</style>

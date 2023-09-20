@@ -1,0 +1,29 @@
+<!doctype html>
+<title>Popper example</title>
+
+<style>
+  #tooltip {
+    background-color: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    width: 600px;
+    height: 1000px;
+  }
+</style>
+
+<button id="button" aria-describedby="tooltip">I'm a button</button>
+<div id="tooltip" role="tooltip">I'm a tooltip</div>
+
+<script src="https://unpkg.com/@popperjs/core@^2.0.0"></script>
+<script>
+  const button = document.querySelector("#button");
+  const tooltip = document.querySelector("#tooltip");
+
+  // Pass the button, the tooltip, and some options, and Popper will do the
+  // magic positioning for you:
+  Popper.createPopper(button, tooltip, {
+    placement: "auto",
+  });
+</script>
