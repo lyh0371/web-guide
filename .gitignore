@@ -18,6 +18,7 @@ docs/.vitepress/cache
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
+!docs/.vitepress/dist
 .idea
 .DS_Store
 *.suo
