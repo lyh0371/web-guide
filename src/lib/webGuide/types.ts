@@ -1,6 +1,7 @@
 export interface StepArr {
   element: string | { (): HTMLElement }; // 发生在哪个元素上
   trigger?: "click" | "hover" | "focus" | "blur"; // 事件类型
+
   speech?: string; // 音频 可以是链接 也是可以是字，如果是子的话 会自己读
   popover?: {
     // 标题和描述
@@ -13,6 +14,7 @@ export interface StepArr {
 export interface Settings {
   stepArr: StepArr[];
   immediate?: boolean; // 是否立即执行
+  logo?: string; // 图片地址
 }
 
 export interface Next {

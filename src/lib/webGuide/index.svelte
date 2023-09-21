@@ -5,10 +5,8 @@
   import Tip from "./Tip.svelte";
   import { defaultDelayed } from "../const";
   export let settings: Settings;
-
   const stepArr = settings.stepArr;
   let finish = false; // 是否结束
-
   let playGuide = settings.immediate; // 是否执行
   let step = 0; // 当前步骤
   let oldStyles = {} as CSSStyleDeclaration;
@@ -64,7 +62,7 @@
 <div style="">
   {#if !finish && playGuide}
     <div class="web-guide__overlay">111</div>
-    <Tip optItem={stepArr[step]} on:guideFinish={isFinish}></Tip>
+    <Tip optItem={stepArr[step]} {settings} on:guideFinish={isFinish}></Tip>
   {/if}
 </div>
 

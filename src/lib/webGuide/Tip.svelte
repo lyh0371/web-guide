@@ -2,14 +2,15 @@
   import { createPopper } from "@popperjs/core";
   import type { Options } from "@popperjs/core";
   import { createEventDispatcher } from "svelte";
-  import type { StepArr } from "./types";
+  import type { StepArr, Settings } from "./types";
   import { getEle } from "./utils";
   import { defaultDelayed } from "../const";
+
   const dispatch = createEventDispatcher();
   let showContent = false;
   export let optItem: StepArr;
-  const piglogo =
-    "//oss-my-official-website.oss-cn-beijing.aliyuncs.com/upload/20230731/dbf62e6a5acf5e7da04b444bb04727d0.png";
+  export let settings: Settings;
+  const piglogo = settings.logo;
   // 设置位置
   const setTipPosition = async (optItem: StepArr) => {
     const tagetDom = await getEle(optItem.element);
@@ -51,7 +52,9 @@
   <div class="web-guide__tip" id="web-guide__tooltip" role="tooltip">
     <div class="p-15px">
       <div class="tip__wapper flex items-start">
-        <img src={piglogo} class="w-80px" alt="" />
+        {#if piglogo}
+          <img src={piglogo} class="w-80px" alt="" />
+        {/if}
         <div class="pl-10px">
           <h2 class="font-700 text-18px leading-24px text-hex-000">
             {optItem.popover.title}

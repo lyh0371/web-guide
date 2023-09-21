@@ -5,6 +5,7 @@
   let child;
   const settings: Settings = {
     immediate: true,
+    logo: "//oss-my-official-website.oss-cn-beijing.aliyuncs.com/upload/20230731/dbf62e6a5acf5e7da04b444bb04727d0.png",
     stepArr: [
       {
         element: () => document.querySelector("#addDiv"),
@@ -43,12 +44,11 @@
 </script>
 
 <div>
-  <div style="height: 400px;"></div>
   <div>
     <button
       id="addDiv"
       on:click={handleClickDiv}
-      class="w-100px bg-hex-0170fe h-40px text-hex-fff m-0px absolute top-200px left-200px"
+      class="w-100px bg-hex-0170fe h-40px text-hex-fff m-0px absolute top-0px left-100px"
       >新增DIV</button
     >
     {#if showDiv}
@@ -67,5 +67,5 @@
   </div>
   <WebGuide {settings} bind:this={child} />
 
-  <button on:click={textHandle}>测试分步控制</button>
+  <!-- <button on:click={textHandle}>测试分步控制</button> -->
 </div>

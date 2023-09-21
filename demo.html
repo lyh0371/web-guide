@@ -80,7 +80,7 @@
         target: document.querySelector("#app"),
         props: {
           settings: {
-            immediate: true,
+            immediate: false,
             stepArr: [
               {
                 element: () => document.querySelector("#addRole"),
@@ -119,7 +119,6 @@
       });
 
       console.log(guide);
-      // console.log(guide.next());
     </script>
   </body>
 </html>
