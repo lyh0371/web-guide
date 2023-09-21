@@ -49,6 +49,4 @@ new webGuide(defineConfig({
 }));
 ```
 
-:::tip
 使用 `defineConfig` 可获取完成的类型提示
-:::
