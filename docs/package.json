@@ -1,0 +1,17 @@
+{
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "docs:preview": "vitepress preview",
+    "init": "vitepress init"
+  },
+  "dependencies": {
+    "sass": "^1.67.0",
+    "vitepress": "^1.0.0-rc.14",
+    "vue": "^3.2.37"
+  },
+  "name": "web-guide-doc",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT"
+}

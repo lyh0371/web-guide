@@ -1,5 +1,4 @@
 import { defineConfig } from "vitepress";
-import { sidebar } from "./theme/sidebar/index.mjs";
 
 export default defineConfig({
   title: "web-guide",

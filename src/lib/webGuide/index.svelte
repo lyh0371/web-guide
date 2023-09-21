@@ -32,10 +32,13 @@
       setStyle(ele, oldStyles);
       ele.removeEventListener(optItem.trigger, () => {});
       step = step + 1;
+      // 结束
       if (step >= stepArr.length) {
+        step = step - 1;
         isFinish();
         return false;
       }
+
       setTimeout(() => {
         start();
       }, optItem.delayed ?? defaultDelayed);

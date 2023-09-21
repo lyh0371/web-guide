@@ -10,8 +10,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "dev:docs": "vitepress dev docs",
-    "build:docs": "vitepress build",
+    "dev:docs": "cd ./docs && yarn dev",
+    "build:docs": "cd ./docs &&  yarn build",
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "devDependencies": {
