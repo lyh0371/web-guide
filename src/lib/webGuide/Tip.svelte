@@ -18,7 +18,7 @@
     const tooltip = document.querySelector(
       "#web-guide__tooltip",
     ) as HTMLElement;
-    const res = createPopper(tagetDom, tooltip, {
+    createPopper(tagetDom, tooltip, {
       placement: "top",
       strategy: "fixed",
       modifiers: [
@@ -29,9 +29,6 @@
           },
         },
       ],
-      onFirstUpdate: (res) => {
-        console.log(res);
-      },
     } as Options);
   };
   setTipPosition(optItem);

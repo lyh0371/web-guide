@@ -26,7 +26,6 @@
       width: width + "px",
       boxShadow: `rgba(33, 33, 33, 0.8) 0px 0px 1px 2px, rgba(33, 33, 33, 0.5) 0px 0px 0px 5000px`,
     } as CSSStyleDeclaration);
-
     ele.addEventListener(optItem.trigger, async () => {
       // 把样式重置回来
       setStyle(ele, oldStyles);
@@ -38,9 +37,9 @@
         isFinish();
         return false;
       }
-
-      setTimeout(() => {
-        start();
+      setTimeout(async () => {
+        oldStyles = {} as CSSStyleDeclaration;
+        await start();
       }, optItem.delayed ?? defaultDelayed);
     });
   };
@@ -49,6 +48,7 @@
     finish = true;
     const ele = await getTargetEle();
     setStyle(ele, oldStyles);
+    ele.style.boxShadow = oldStyles.boxShadow;
   };
   // 是否立即执行
   if (playGuide) {
