@@ -37,9 +37,9 @@ yarn  add  @liuyahui666/web-guide -S
 ### 2. 使用
 
 ```js
-import webGuide from "web-guide";
+import webGuide,{ defineConfig } from "@liuyahui666/web-guide";
 
-new webGuide({
+new webGuide(defineConfig({
   target: document.querySelector("#app"), // 页面的跟元素
   props: {
     settings: {
@@ -57,5 +57,9 @@ new webGuide({
       ],
     },
   },
-});
+}));
 ```
+
+:::tip
+使用 `defineConfig` 可获取完成的类型提示
+:::
