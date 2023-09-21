@@ -1,43 +1,54 @@
-# web-guide(开发中)
+## 使用场景
 
-于框架无关的 前端动态新手引导插件
+社区有很多关于新手引导的组件，比如优秀的 [driver.js](https://github.com/kamranahmedse/driver.js)、[shepherd](https://github.com/shipshapecode/shepherd)、[introjs](https://introjs.com/) ...
 
-## 参数
+但这些组件主要解决的还是`静态页面`的引导，适用于需要引导的功能都在静态页面上呈现出来的场景。
 
-```ts
-[
-  {
-    step: 1,
-    element: "dom",
-    trigger: "click",
-    speech: "...mp3",
-    popover: {
-      title: "Title",
-      description: "Description",
-    },
-    isFinish: () => {
-      // 返回true 表示步骤1 彻底结束
-      return true;
-    },
-  },
-];
+而 `web-guide` 主要解决的是`动态页面`的引导，即需要引导的内容可以动态的按照先后顺序出现的场景。
+
+[查看案例](https://web-guide-ebon.vercel.app/example/demo1.html)
+
+## 如何使用
+
+### 1. 安装
+
+```sh
+npm i @liuyahui666/web-guide -S
 ```
 
-## 手动触发逻辑
+或者
 
-插件对外暴露一个函数 `next` 可以传参数，如果传参数就自动跳转到哪一个步走
+```sh
+yarn  add  @liuyahui666/web-guide -S
 
-## 如何让 vscode 格式化 .svelte 文件
+```
 
-prettier-plugin-svelte
-
-// 在线文字转语音
-// https://ttsmaker.com/zh-cn
+### 2. 使用
 
 ```js
-let utter = new SpeechSynthesisUtterance("非常方便");
-utter.volume = 1;
-// utter.pitch = 0.5; //音调
-utter.rate = 1;
-speechSynthesis.speak(utter);
+import webGuide,{ defineConfig } from "@liuyahui666/web-guide";
+
+new webGuide(defineConfig({
+  target: document.querySelector("#app"), // 页面的跟元素
+  props: {
+    settings: {
+      immediate: true, // 是否立即开始引导
+      stepArr: [ // 每一步的配置
+        {
+          element: () => document.querySelector("#addDiv"), // 在那个元素上触发
+          trigger: "click", // 如何触发
+          popover: {
+            title:"请点击div", // 标题
+            description:"点击div有惊喜哦", // 详情
+          },
+        },
+        ...
+      ],
+    },
+  },
+}));
 ```
+
+:::tip
+使用 `defineConfig` 可获取完成的类型提示
+:::
