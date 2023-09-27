@@ -15,6 +15,7 @@
     return await getEle(optItem.element); // 当前操作的Dom对象
   }
   const start = async () => {
+    if (finish) return false;
     let optItem = stepArr[step];
     const ele = await getTargetEle();
     const { width } = ele.getBoundingClientRect();
@@ -44,27 +45,40 @@
     });
   };
 
+  const removeAll = () => {
+    const webguides = document.querySelectorAll("#web-guide");
+    if (webguides) {
+      webguides.forEach((item, index) => {
+        if (index >= 1) {
+          item.remove();
+        }
+      });
+    }
+  };
+
   const isFinish = async () => {
     finish = true;
     const ele = await getTargetEle();
     setStyle(ele, oldStyles);
-    ele.style.boxShadow = oldStyles.boxShadow;
+    step = 0;
+    removeAll();
   };
+
   // 是否立即执行
   if (playGuide) {
     onMount(start);
   }
   // 分步函数
-  export function next({ step: index }: Next) {
+  export function next() {
     playGuide = true;
-    step = step;
+    finish = false;
     start();
   }
 </script>
 
-<div style="">
+<div id="web-guide">
   {#if !finish && playGuide}
-    <div class="web-guide__overlay">111</div>
+    <div class="web-guide__overlay"></div>
     <Tip optItem={stepArr[step]} {settings} on:guideFinish={isFinish}></Tip>
   {/if}
 </div>

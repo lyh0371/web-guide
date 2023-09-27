@@ -4,7 +4,7 @@
   let inx = 0;
   let child;
   const settings: Settings = {
-    immediate: true,
+    immediate: false,
     logo: "//oss-my-official-website.oss-cn-beijing.aliyuncs.com/upload/20230731/dbf62e6a5acf5e7da04b444bb04727d0.png",
     stepArr: [
       {
@@ -34,7 +34,7 @@
     showDiv = true;
   };
   const textHandle = () => {
-    child.next(0);
+    child.next();
   };
 
   const divBtnClick = () => {
@@ -67,5 +67,5 @@
   </div>
   <WebGuide {settings} bind:this={child} />
 
-  <!-- <button on:click={textHandle}>测试分步控制</button> -->
+  <button on:click={textHandle}>测试分步控制</button>
 </div>
