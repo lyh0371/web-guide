@@ -38,15 +38,16 @@ yarn  add  @liuyahui666/web-guide -S
 
 ```js
 import webGuide,{ defineConfig } from "@liuyahui666/web-guide";
+import "@liuyahui666/web-guide/index.css"
 
 new webGuide(defineConfig({
-  target: document.querySelector("#app"), // 页面的跟元素
+  target: document.querySelector("#app")!, // 页面的跟元素
   props: {
     settings: {
       immediate: true, // 是否立即开始引导
       stepArr: [ // 每一步的配置
         {
-          element: () => document.querySelector("#addDiv"), // 在那个元素上触发
+          element: () => document.querySelector("#addDiv")!, // 在那个元素上触发
           trigger: "click", // 如何触发
           popover: {
             title:"请点击div", // 标题
