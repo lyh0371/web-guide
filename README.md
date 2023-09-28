@@ -27,7 +27,7 @@ yarn  add  @liuyahui666/web-guide -S
 
 ```js
 import webGuide,{ defineConfig } from "@liuyahui666/web-guide";
-
+import "@liuyahui666/web-guide/index.css"
 new webGuide(defineConfig({
   target: document.querySelector("#app"), // 页面的跟元素
   props: {
