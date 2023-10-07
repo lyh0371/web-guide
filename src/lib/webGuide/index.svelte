@@ -32,7 +32,7 @@
         // 把样式重置回来
         setStyle(ele, oldStyles);
         ele.removeEventListener(stepArr[step].trigger, () => {});
-        addStep();
+        if (!addStep()) return false;
         showGuide = false;
         setTimeout(async () => {
           oldStyles = {} as CSSStyleDeclaration;
@@ -59,6 +59,7 @@
       isFinish();
       return false;
     }
+    return true;
   };
 
   const removeAll = () => {
