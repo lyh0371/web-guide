@@ -6,43 +6,59 @@
   import { defaultDelayed } from "../const";
   export let settings: Settings;
   const stepArr = settings.stepArr;
-  let finish = false; // 是否结束
-  let playGuide = settings.immediate; // 是否执行
+  let showGuide = false; // 是否显示
+  let playGuide = settings.immediate; // 是否立即执行
   let step = 0; // 当前步骤
+  let firstRun = true;
   let oldStyles = {} as CSSStyleDeclaration;
   async function getTargetEle() {
     let optItem = stepArr[step];
-    return await getEle(optItem.element); // 当前操作的Dom对象
+    return getEle(optItem.element); // 当前操作的Dom对象
   }
-  const start = async () => {
-    if (finish) return false;
-    let optItem = stepArr[step];
-    const ele = await getTargetEle();
-    const { width } = ele.getBoundingClientRect();
-    // 给 ele 设置样式
-    oldStyles = getStyles(ele);
-    setStyle(ele, {
-      position: "relative",
-      zIndex: "9999998",
-      width: width + "px",
-      boxShadow: `rgba(33, 33, 33, 0.8) 0px 0px 1px 2px, rgba(33, 33, 33, 0.5) 0px 0px 0px 5000px`,
-    } as CSSStyleDeclaration);
-    ele.addEventListener(optItem.trigger, async () => {
-      // 把样式重置回来
-      setStyle(ele, oldStyles);
-      ele.removeEventListener(optItem.trigger, () => {});
-      step = step + 1;
-      // 结束
-      if (step >= stepArr.length) {
-        step = step - 1;
-        isFinish();
-        return false;
+  const _init = async () => {
+    showGuide = true;
+    try {
+      const ele = await getTargetEle();
+      const { width } = ele.getBoundingClientRect();
+      oldStyles = getStyles(ele);
+      setStyle(ele, {
+        position: "relative",
+        zIndex: "9999998",
+        width: width + "px",
+        boxShadow: `rgba(33, 33, 33, 0.8) 0px 0px 1px 2px, rgba(33, 33, 33, 0.5) 0px 0px 0px 5000px`,
+      } as CSSStyleDeclaration);
+
+      const goNextCore = async () => {
+        // 把样式重置回来
+        setStyle(ele, oldStyles);
+        ele.removeEventListener(stepArr[step].trigger, () => {});
+        addStep();
+        showGuide = false;
+        setTimeout(async () => {
+          oldStyles = {} as CSSStyleDeclaration;
+          await _init();
+        }, stepArr[step].delayed ?? defaultDelayed);
+      };
+
+      // 如果是立即执行，则直接执行，并监听点击事件
+      if (settings.immediate) {
+        ele.addEventListener(stepArr[step].trigger, goNextCore);
       }
-      setTimeout(async () => {
-        oldStyles = {} as CSSStyleDeclaration;
-        await start();
-      }, optItem.delayed ?? defaultDelayed);
-    });
+    } catch (error) {
+      showGuide = false;
+      step = 0;
+      removeAll();
+    }
+  };
+
+  const addStep = () => {
+    step = step + 1;
+    // 结束
+    if (step >= stepArr.length) {
+      step = step - 1;
+      isFinish();
+      return false;
+    }
   };
 
   const removeAll = () => {
@@ -57,7 +73,7 @@
   };
 
   const isFinish = async () => {
-    finish = true;
+    showGuide = false;
     const ele = await getTargetEle();
     setStyle(ele, oldStyles);
     step = 0;
@@ -66,18 +82,22 @@
 
   // 是否立即执行
   if (playGuide) {
-    onMount(start);
+    onMount(() => {
+      setTimeout(async () => {
+        await _init();
+      }, stepArr[step].delayed ?? defaultDelayed);
+    });
   }
+
+  // 开始分步执行
+
+  export function start() {}
   // 分步函数
-  export function next() {
-    playGuide = true;
-    finish = false;
-    start();
-  }
+  export function next() {}
 </script>
 
 <div id="web-guide">
-  {#if !finish && playGuide}
+  {#if showGuide}
     <div class="web-guide__overlay"></div>
     <Tip optItem={stepArr[step]} {settings} on:guideFinish={isFinish}></Tip>
   {/if}

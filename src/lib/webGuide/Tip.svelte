@@ -1,19 +1,19 @@
 <script lang="ts">
   import { createPopper } from "@popperjs/core";
   import type { Options } from "@popperjs/core";
-  import { createEventDispatcher } from "svelte";
+  import { createEventDispatcher, onMount } from "svelte";
   import type { StepArr, Settings } from "./types";
   import { getEle } from "./utils";
   import { defaultDelayed } from "../const";
 
   const dispatch = createEventDispatcher();
-  let showContent = false;
+
   export let optItem: StepArr;
   export let settings: Settings;
   const piglogo = settings.logo;
   // 设置位置
   const setTipPosition = async (optItem: StepArr) => {
-    const tagetDom = await getEle(optItem.element);
+    const tagetDom = getEle(optItem.element);
     // x轴
     const tooltip = document.querySelector(
       "#web-guide__tooltip",
@@ -33,10 +33,13 @@
   };
   setTipPosition(optItem);
   $: {
-    setTimeout(() => {
-      setTipPosition(optItem);
-    }, optItem.delayed ?? defaultDelayed);
+    // console.log("optItem", optItem);
+
+    setTipPosition(optItem);
   }
+  onMount(() => {
+    setTipPosition(optItem);
+  });
   const endHandle = () => {
     dispatch("guideFinish");
   };

@@ -1,25 +1,18 @@
 // 验证传进来的 element
-export const getEle = (
-  ele: string | { (): HTMLElement },
-): Promise<HTMLElement> => {
-  return new Promise((res, req) => {
-    setTimeout(() => {
-      if (typeof ele === "string") {
-        if (document.querySelector(ele))
-          res(document.querySelector(ele) as HTMLElement);
-        else throw new Error("未获取到element");
+export const getEle = (ele: string | { (): HTMLElement }): HTMLElement => {
+  if (typeof ele === "string") {
+    if (document.querySelector(ele))
+      return document.querySelector(ele) as HTMLElement;
+    else throw new Error(`未获取到${ele}元素`);
 
-        return;
-      }
-      if (typeof ele === "function") {
-        if (ele()) res(ele());
-        else throw new Error("未获取到element");
+    return;
+  }
+  if (typeof ele === "function") {
+    if (ele()) return ele() as HTMLElement;
+    else throw new Error(`未获取到${ele}元素`);
 
-        return;
-      }
-      throw new Error("未获取到element");
-    }, 0);
-  });
+    return;
+  } else throw new Error(`未获取到${ele}元素`);
 };
 
 // 设置元素的css
