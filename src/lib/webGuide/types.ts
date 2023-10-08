@@ -18,5 +18,5 @@ export interface Settings {
 }
 
 export interface Next {
-  step: number;
+  step: number | "finish";
 }
