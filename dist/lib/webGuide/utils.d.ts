@@ -1,6 +1,6 @@
 export declare const getEle: (ele: string | {
     (): HTMLElement;
-}) => Promise<HTMLElement>;
+}) => HTMLElement;
 export declare const setStyle: (ele: HTMLElement, style: CSSStyleDeclaration) => boolean;
 export declare const getDomDiection: (myDiv: HTMLElement) => {
     top?: undefined;

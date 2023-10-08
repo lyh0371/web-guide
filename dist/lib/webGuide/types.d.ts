@@ -16,5 +16,5 @@ export interface Settings {
     logo?: string;
 }
 export interface Next {
-    step: number;
+    step: number | "finish";
 }
