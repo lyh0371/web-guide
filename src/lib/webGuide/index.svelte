@@ -7,9 +7,9 @@
   export let settings: Settings;
   const stepArr = settings.stepArr;
   let showGuide = false; // 是否显示
+  let finishFlag = false; // 是否点击了完成
   let playGuide = settings.immediate; // 是否立即执行
   let step = 0; // 当前步骤
-  let firstRun = true;
   let oldStyles = {} as CSSStyleDeclaration;
   async function getTargetEle() {
     let optItem = stepArr[step];
@@ -19,6 +19,9 @@
     showGuide = true;
     try {
       const ele = await getTargetEle();
+
+      console.log("ele", ele);
+
       const { width } = ele.getBoundingClientRect();
       oldStyles = getStyles(ele);
       setStyle(ele, {
@@ -31,18 +34,19 @@
       const goNextCore = async () => {
         // 把样式重置回来
         setStyle(ele, oldStyles);
-        ele.removeEventListener(stepArr[step].trigger, () => {});
+        ele.removeEventListener(stepArr[step]?.trigger, () => {});
+
         if (!addStep()) return false;
         showGuide = false;
         setTimeout(async () => {
           oldStyles = {} as CSSStyleDeclaration;
           await _init();
-        }, stepArr[step].delayed ?? defaultDelayed);
+        }, stepArr[step]?.delayed ?? defaultDelayed);
       };
 
       // 如果是立即执行，则直接执行，并监听点击事件
       if (settings.immediate) {
-        ele.addEventListener(stepArr[step].trigger, goNextCore);
+        ele.addEventListener(stepArr[step]?.trigger, goNextCore);
       }
     } catch (error) {
       showGuide = false;
@@ -52,13 +56,14 @@
   };
 
   const addStep = () => {
-    step = step + 1;
+    if (!showGuide) return false;
     // 结束
-    if (step >= stepArr.length) {
-      step = step - 1;
+    if (step >= stepArr.length - 1) {
+      // step = step - 1;
       isFinish();
       return false;
     }
+    step = step + 1;
     return true;
   };
 
@@ -75,6 +80,7 @@
 
   const isFinish = async () => {
     showGuide = false;
+    finishFlag = true;
     const ele = await getTargetEle();
     setStyle(ele, oldStyles);
     step = 0;
@@ -91,10 +97,25 @@
   }
 
   // 开始分步执行
-
-  export function start() {}
   // 分步函数
-  export function next() {}
+  export async function next(index: number | "finish") {
+    if (finishFlag) return false;
+    showGuide = false;
+    if (index === "finish") {
+      isFinish();
+      return false;
+    }
+    const ele = await getTargetEle();
+    if (index > 0) {
+      const oele = getEle(stepArr[index - 1].element);
+      setStyle(oele, oldStyles);
+    }
+    step = index;
+    oldStyles = getStyles(ele);
+    setTimeout(async () => {
+      await _init();
+    }, stepArr[step].delayed ?? defaultDelayed);
+  }
 </script>
 
 <div id="web-guide">

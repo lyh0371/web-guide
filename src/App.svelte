@@ -4,7 +4,7 @@
   let inx = 0;
   let child;
   const settings: Settings = {
-    immediate: true,
+    immediate: false,
     logo: "//oss-my-official-website.oss-cn-beijing.aliyuncs.com/upload/20230731/dbf62e6a5acf5e7da04b444bb04727d0.png",
     stepArr: [
       {
@@ -19,7 +19,7 @@
       },
       {
         element: () => document.querySelector("#idDivBtn"),
-        delayed: 2000,
+        delayed: 0,
         trigger: "click",
         speech: "很好,您点击了这个按钮!",
         popover: {
@@ -33,15 +33,16 @@
   let showDiv = false;
   const handleClickDiv = () => {
     showDiv = true;
-    child.next();
+    child.next(1);
   };
   const textHandle = () => {
-    child.next();
+    child.next(0);
   };
 
   const divBtnClick = () => {
     const div = document.querySelector("#isDiv") as HTMLElement;
     div.style.backgroundColor = "red";
+    child.next("finish");
   };
 </script>
 
