@@ -10,5 +10,8 @@ export interface Config {
     settings: Settings;
   };
 }
+
+export * from "./webGuide/types";
+
 export const defineConfig = (config: Config): Config => config;
 export default webGuide;

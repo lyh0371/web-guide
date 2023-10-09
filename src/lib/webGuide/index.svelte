@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import type { Next, Settings } from "./types";
+  import type { NextProps, Settings } from "./types";
   import { getEle, getStyles, setStyle } from "./utils";
   import Tip from "./Tip.svelte";
   import { defaultDelayed } from "../const";
@@ -8,6 +8,7 @@
   const stepArr = settings.stepArr;
   let showGuide = false; // 是否显示
   let finishFlag = false; // 是否点击了完成
+  let startIng = false; // 是否点击开始
   let playGuide = settings.immediate; // 是否立即执行
   let step = 0; // 当前步骤
   let oldStyles = {} as CSSStyleDeclaration;
@@ -19,11 +20,10 @@
     showGuide = true;
     try {
       const ele = await getTargetEle();
-
-      console.log("ele", ele);
-
       const { width } = ele.getBoundingClientRect();
+
       oldStyles = getStyles(ele);
+      console.log("ele", ele, oldStyles);
       setStyle(ele, {
         position: "relative",
         zIndex: "9999998",
@@ -98,13 +98,34 @@
 
   // 开始分步执行
   // 分步函数
-  export async function next(index: number | "finish") {
+
+  export async function next(props: NextProps) {
+    if (!startIng) return false;
+    if (!props.id || !props.status) {
+      console.warn("id or status is not exist");
+      return false;
+    }
     if (finishFlag) return false;
     showGuide = false;
-    if (index === "finish") {
+    const index = stepArr.findIndex((item) => item.id === props.id);
+    // 彻底完成
+    if (props.status === "finish") {
       isFinish();
       return false;
     }
+    // 暂停
+
+    if (props.status === "pause") {
+      const ele = await getTargetEle();
+
+      console.log("oldStyles", oldStyles);
+
+      setStyle(ele, oldStyles);
+      return false;
+    }
+
+    // 开始
+
     const ele = await getTargetEle();
     if (index > 0) {
       const oele = getEle(stepArr[index - 1].element);
@@ -116,6 +137,20 @@
       await _init();
     }, stepArr[step].delayed ?? defaultDelayed);
   }
+
+  // 手动控制开始
+  export function start() {
+    if (finishFlag) return false;
+    showGuide = false;
+    step = 0;
+    startIng = true;
+
+    setTimeout(async () => {
+      await _init();
+    }, stepArr[step].delayed ?? defaultDelayed);
+  }
+
+  console.info("v0.0.7");
 </script>
 
 <div id="web-guide">

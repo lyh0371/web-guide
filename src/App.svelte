@@ -1,8 +1,11 @@
 <script lang="ts">
+  import { onMount } from "svelte";
   import WebGuide from "./lib/webGuide/index.svelte";
   import type { Settings } from "./lib/webGuide/types";
   let inx = 0;
   let child;
+  let inpVal = "1111";
+  let inputRef;
   const settings: Settings = {
     immediate: false,
     logo: "//oss-my-official-website.oss-cn-beijing.aliyuncs.com/upload/20230731/dbf62e6a5acf5e7da04b444bb04727d0.png",
@@ -10,6 +13,7 @@
       {
         element: () => document.querySelector("#addDiv"),
         trigger: "click",
+        id: 1,
         speech: "很好,您点击了这个按钮!",
         popover: {
           title: "请点击div请点击div",
@@ -19,6 +23,7 @@
       },
       {
         element: () => document.querySelector("#idDivBtn"),
+        id: 2,
         delayed: 0,
         trigger: "click",
         speech: "很好,您点击了这个按钮!",
@@ -33,17 +38,33 @@
   let showDiv = false;
   const handleClickDiv = () => {
     showDiv = true;
-    child.next(1);
+    child.next({
+      id: 1,
+      status: "pause",
+    });
   };
   const textHandle = () => {
-    child.next(0);
+    child.start();
   };
 
   const divBtnClick = () => {
     const div = document.querySelector("#isDiv") as HTMLElement;
     div.style.backgroundColor = "red";
-    child.next("finish");
+    child.next({
+      id: 2,
+      status: "finish",
+    });
   };
+
+  const inputHandle = (e) => {
+    console.log("e.target.value", e.target.value);
+
+    inpVal = e.target.value;
+  };
+
+  onMount(() => {
+    inputRef = document.querySelector("#inputElement");
+  });
 </script>
 
 <div>
@@ -65,6 +86,15 @@
           class=" bg-hex-0170fe h-40px text-hex-fff m-20px px-10px"
           >给DIV添加点颜色瞧瞧</button
         >
+        {#key showDiv}
+          <input
+            id="inputElement"
+            type="text"
+            on:input={inputHandle}
+            bind:value={inpVal}
+            bind:this={inputRef}
+          />
+        {/key}
       </div>
     {/if}
   </div>

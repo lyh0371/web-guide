@@ -3,6 +3,8 @@ export interface StepArr {
         (): HTMLElement;
     };
     trigger?: "click" | "hover" | "focus" | "blur";
+    name?: string;
+    id: number;
     speech?: string;
     popover?: {
         title: string;
@@ -15,6 +17,8 @@ export interface Settings {
     immediate?: boolean;
     logo?: string;
 }
-export interface Next {
-    step: number | "finish";
+export interface NextProps {
+    name?: string;
+    id: number;
+    status: "start" | "finish" | "pause";
 }
