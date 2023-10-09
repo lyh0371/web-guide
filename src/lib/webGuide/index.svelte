@@ -3,6 +3,7 @@
   import type { NextProps, Settings } from "./types";
   import { getEle, getStyles, setStyle } from "./utils";
   import Tip from "./Tip.svelte";
+  import pkg from "../../../build/package.json";
   import { defaultDelayed } from "../const";
   export let settings: Settings;
   const stepArr = settings.stepArr;
@@ -21,9 +22,7 @@
     try {
       const ele = await getTargetEle();
       const { width } = ele.getBoundingClientRect();
-
       oldStyles = getStyles(ele);
-      console.log("ele", ele, oldStyles);
       setStyle(ele, {
         position: "relative",
         zIndex: "9999998",
@@ -118,8 +117,6 @@
     if (props.status === "pause") {
       const ele = await getTargetEle();
 
-      console.log("oldStyles", oldStyles);
-
       setStyle(ele, oldStyles);
       return false;
     }
@@ -150,7 +147,7 @@
     }, stepArr[step].delayed ?? defaultDelayed);
   }
 
-  console.info("v0.0.7");
+  console.info("web-guide当前使用版本", pkg.version);
 </script>
 
 <div id="web-guide">
