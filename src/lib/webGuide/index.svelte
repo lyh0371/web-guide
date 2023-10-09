@@ -137,7 +137,6 @@
 
   // 手动控制开始
   export function start() {
-    if (finishFlag) return false;
     showGuide = false;
     step = 0;
     startIng = true;

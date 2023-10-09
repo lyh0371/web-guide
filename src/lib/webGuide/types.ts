@@ -23,3 +23,8 @@ export interface NextProps {
   id: number;
   status: "start" | "finish" | "pause";
 }
+
+export interface WebGuide {
+  start: () => void;
+  next: (nextProps: NextProps) => void;
+}
