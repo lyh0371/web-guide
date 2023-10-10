@@ -5,12 +5,13 @@
   import Tip from "./Tip.svelte";
   import pkg from "../../../build/package.json";
   import { defaultDelayed } from "../const";
+
   export let settings: Settings;
   const stepArr = settings.stepArr;
   let showGuide = false; // 是否显示
   let finishFlag = false; // 是否点击了完成
   let startIng = false; // 是否点击开始
-  let playGuide = settings.immediate; // 是否立即执行
+  let playGuide = settings.immediate || false; // 是否立即执行
   let step = 0; // 当前步骤
   let oldStyles = {} as CSSStyleDeclaration;
   async function getTargetEle() {
@@ -33,7 +34,7 @@
       const goNextCore = async () => {
         // 把样式重置回来
         setStyle(ele, oldStyles);
-        ele.removeEventListener(stepArr[step]?.trigger, () => {});
+        ele.removeEventListener(stepArr[step]?.trigger || "click", () => {});
 
         if (!addStep()) return false;
         showGuide = false;
@@ -45,7 +46,7 @@
 
       // 如果是立即执行，则直接执行，并监听点击事件
       if (settings.immediate) {
-        ele.addEventListener(stepArr[step]?.trigger, goNextCore);
+        ele.addEventListener(stepArr[step]?.trigger || "click", goNextCore);
       }
     } catch (error) {
       showGuide = false;
@@ -107,14 +108,9 @@
     if (finishFlag) return false;
     showGuide = false;
     const index = stepArr.findIndex((item) => item.id === props.id);
-    // 彻底完成
-    if (props.status === "finish") {
-      isFinish();
-      return false;
-    }
-    // 暂停
 
-    if (props.status === "pause") {
+    // 本轮结束
+    if (props.status === "end") {
       const ele = await getTargetEle();
 
       setStyle(ele, oldStyles);
@@ -144,6 +140,10 @@
     setTimeout(async () => {
       await _init();
     }, stepArr[step].delayed ?? defaultDelayed);
+  }
+  // 切底结束
+  export function end() {
+    isFinish();
   }
 
   console.info("web-guide当前使用版本", pkg.version);

@@ -1,7 +1,7 @@
 ---
 page: true
 title: 指南
-sidebar: false
+sidebar: true
 aside: true
 footer: true
 returnToTop: false
@@ -44,11 +44,12 @@ new webGuide(defineConfig({
   target: document.querySelector("#app")!, // 页面的跟元素
   props: {
     settings: {
-      immediate: true, // 是否立即开始引导
+      immediate: true, // 是否立即触发引导
+      logo:'', // 引导页的图片地址
       stepArr: [ // 每一步的配置
         {
-          element: () => document.querySelector("#addDiv")!, // 在那个元素上触发
-          trigger: "click", // 如何触发
+          element: () => document.querySelector("#addDiv")!, // 在哪个元素上触发
+          trigger: "click", // 如何触发  immediate为false时可忽略
           popover: {
             title:"请点击div", // 标题
             description:"点击div有惊喜哦", // 详情

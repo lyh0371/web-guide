@@ -1,1 +1,0 @@
-import{_ as t,o as e,c as a,Q as d}from"./chunks/framework.19f61efe.js";const h=JSON.parse('{"title":"自动开启","description":"","frontmatter":{},"headers":[],"relativePath":"example/demo1.md","filePath":"example/demo1.md"}'),o={name:"example/demo1.md"},n=d("",2),i=[n];function s(r,c,p,_,l,m){return e(),a("div",null,i)}const v=t(o,[["render",s]]);export{h as __pageData,v as default};

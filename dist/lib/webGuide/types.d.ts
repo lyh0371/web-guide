@@ -20,5 +20,10 @@ export interface Settings {
 export interface NextProps {
     name?: string;
     id: number;
-    status: "start" | "finish" | "pause";
+    status: "start" | "end";
+}
+export interface WebGuide {
+    start: () => void;
+    end: () => void;
+    next: (nextProps: NextProps) => void;
 }

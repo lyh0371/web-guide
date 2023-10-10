@@ -22,17 +22,27 @@ export default defineConfig({
       label: "本页目录",
     },
     nav: [
-      { text: "指南", link: "/guide/start" },
-      { text: "案例", link: "/example/demo1" },
+      { text: "指南", link: "/guide/start", activeMatch: "/guide/" },
+      { text: "案例", link: "/example/demo1", activeMatch: "/example/" },
     ],
-    sidebar: [
-      {
-        text: "指南",
-        items: [
-          { text: "自动开启", link: "/example/demo1" },
-          { text: "手动开启", link: "/example/demo2" },
-        ],
-      },
-    ],
+    sidebar: {
+      "/guide/": [
+        {
+          items: [
+            { text: "API", link: "/guide/api" },
+            { text: "使用", link: "/guide/use" },
+          ],
+        },
+      ],
+      "/example/": [
+        {
+          text: "案例",
+          items: [
+            { text: "自动开启", link: "/example/demo1" },
+            { text: "手动开启", link: "/example/demo2" },
+          ],
+        },
+      ],
+    },
   },
 });

@@ -1,6 +1,17 @@
 .wapper {
   padding: 100px;
 }
+.btnWap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.startGuide {
+  color: #3e63dd;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+}
 #addRole {
   background: #3e63dd;
   color: #fff;
