@@ -1,6 +1,6 @@
 {
   "name": "@liuyahui666/web-guide",
-  "version": "0.0.9",
+  "version": "1.0.0",
   "type": "module",
   "description": "与框架无关的前端动态新手引导组件",
   "main": "index.js",

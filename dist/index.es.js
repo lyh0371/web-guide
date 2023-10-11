@@ -1314,7 +1314,7 @@ class jn extends We {
     super(), Me(this, e, Dn, Pn, je, { optItem: 0, settings: 3 }, kn);
   }
 }
-const Cn = "@liuyahui666/web-guide", Sn = "0.0.9", Rn = "module", Bn = "与框架无关的前端动态新手引导组件", Tn = "index.js", Ln = "./index.es.js", Mn = "./lib/index.d.ts", Wn = {
+const Cn = "@liuyahui666/web-guide", Sn = "1.0.0", Rn = "module", Bn = "与框架无关的前端动态新手引导组件", Tn = "index.js", Ln = "./index.es.js", Mn = "./lib/index.d.ts", Wn = {
   name: Cn,
   version: Sn,
   type: Rn,
